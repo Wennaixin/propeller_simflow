@@ -1,108 +1,5 @@
-Graphics3D
-{
-	MeshParameters
-	{
-	}
-	CellZonesParameters
-	{
-	}
-	ProbeParameters
-	{
-	}
-	View
-	{
-		SavedViews
-		{
-		}
-	}
-	PostprocessingParameters
-	{
-		ActiveTime	0;
-		ActiveField	Solid;
-	}
-	GeometryParameters
-	{
-		propeller
-		{
-			color	(112 128 144);
-			transparency	0.0;
-			hide	false;
-		}
-		external
-		{
-			color	(112 128 144);
-			transparency	0.5;
-			hide	false;
-		}
-		refine
-		{
-			color	(112 128 144);
-			transparency	0.0;
-			hide	false;
-		}
-	}
-	postprocessingPlots
-	{
-	}
-	SlicesParameters
-	{
-	}
-}
-summary
-{
-}
-inputs
-{
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-		}
-	}
-}
-mesh
-{
-}
-parameters
-{
-}
-fieldInputs
-{
-	default
-	{
-	}
-}
 probes
 {
-}
-meshing
-{
-	parallel	false;
-	processors	8;
-	meshingStages
-	{
-		Base	true;
-		Mesh	true;
-		Layers	true;
-	}
-}
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
 }
 primitiveMesh
 {
@@ -116,9 +13,9 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			x_minus
+			x_plus
 			{
-				name	inlet;
+				name	outlet;
 				type	patch;
 			}
 			z_minus
@@ -126,19 +23,19 @@ primitiveMesh
 				name	left;
 				type	patch;
 			}
-			y_minus
-			{
-				name	right;
-				type	patch;
-			}
 			y_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			x_plus
+			y_minus
 			{
-				name	outlet;
+				name	right;
+				type	patch;
+			}
+			x_minus
+			{
+				name	inlet;
 				type	patch;
 			}
 			z_plus
@@ -162,17 +59,17 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
 			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
 			outlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -192,7 +89,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			y_plus
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -202,12 +99,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			x_minus
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
+			y_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -226,12 +123,12 @@ primitiveMesh
 		axialGrading	1;
 		boundaries
 		{
-			outlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
-			cylinder
+			outlet
 			{
 				name	boundaries;
 				type	patch;
@@ -244,13 +141,38 @@ primitiveMesh
 		}
 	}
 }
-slices
+fieldInputs
 {
-}
-materials
-{
-	regions
+	default
 	{
+	}
+}
+meshing
+{
+	parallel	false;
+	processors	8;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+inputs
+{
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
 	}
 }
 geometry
@@ -281,7 +203,130 @@ geometry
 		radius	1;
 	}
 }
+slices
+{
+}
+parameters
+{
+}
 application
 {
 	mode	normal;
+}
+summary
+{
+}
+mesh
+{
+}
+Graphics3D
+{
+	MeshParameters
+	{
+		default
+		{
+			external
+			{
+				color	(155 50 0);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			inlet
+			{
+				color	(155 180 50);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			left
+			{
+				color	(51 255 0);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			outlet
+			{
+				color	(0 255 178);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			propeller
+			{
+				color	(0 102 255);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+			right
+			{
+				color	(128 0 255);
+				transparency	0.0;
+				faceHide	false;
+				edgesHide	false;
+			}
+		}
+	}
+	CellZonesParameters
+	{
+	}
+	ProbeParameters
+	{
+	}
+	View
+	{
+		SavedViews
+		{
+		}
+	}
+	PostprocessingParameters
+	{
+		ActiveTime	0;
+		ActiveField	Solid;
+	}
+	GeometryParameters
+	{
+		propeller
+		{
+			color	(112 128 144);
+			transparency	0.0;
+			hide	true;
+		}
+		external
+		{
+			color	(112 128 144);
+			transparency	0.5;
+			hide	true;
+		}
+		refine
+		{
+			color	(112 128 144);
+			transparency	0.0;
+			hide	true;
+		}
+	}
+	postprocessingPlots
+	{
+	}
+	SlicesParameters
+	{
+	}
+}
+materials
+{
+	regions
+	{
+	}
+}
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
 }
