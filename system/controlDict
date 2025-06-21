@@ -25,6 +25,25 @@ timePrecision	6;
 writeFormat	binary;
 writePrecision	7;
 libs	("libfvMotionSolvers.dll" "libturbulenceModels.dll" "libturbulenceModelSchemes.dll" "libfvOptions.dll");
+functions
+{
+	forceMonitorOnPropellerInDefault
+	{
+		U	U;
+		libs	("libforces.dll");
+		p	p;
+		rho	rhoInf;
+		type	forces;
+		CofR	(0 0 0);
+		coefficients	(Cd Cl CmPitch);
+		patches	(propeller);
+		rhoInf	1.0;
+		executeInterval	1;
+		enabled	true;
+		log	true;
+		writeInterval	1;
+	}
+}
 OptimisationSwitches
 {
 	fileHandler	uncollated;
