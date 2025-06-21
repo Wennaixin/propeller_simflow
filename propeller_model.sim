@@ -1,6 +1,11 @@
-application
+summary
 {
-	mode	normal;
+}
+slices
+{
+}
+mesh
+{
 }
 geometry
 {
@@ -30,11 +35,38 @@ geometry
 		radius	1;
 	}
 }
+materials
+{
+	regions
+	{
+	}
+}
 fieldInputs
 {
 	default
 	{
 	}
+}
+inputs
+{
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
+}
+application
+{
+	mode	normal;
 }
 primitiveMesh
 {
@@ -48,22 +80,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			y_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
 			y_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			x_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			z_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -74,6 +91,21 @@ primitiveMesh
 				type	patch;
 			}
 			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			z_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -94,17 +126,17 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
-			cylinder
-			{
-				name	boundaries;
-				type	patch;
-			}
 			outlet
 			{
 				name	boundaries;
 				type	patch;
 			}
 			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
@@ -124,7 +156,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			x_minus
+			y_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -134,12 +166,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_plus
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -158,11 +190,6 @@ primitiveMesh
 		axialGrading	1;
 		boundaries
 		{
-			inlet
-			{
-				name	boundaries;
-				type	patch;
-			}
 			cylinder
 			{
 				name	boundaries;
@@ -173,48 +200,13 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-		}
-	}
-}
-inputs
-{
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
+			inlet
 			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
+				name	boundaries;
+				type	patch;
 			}
 		}
 	}
-}
-probes
-{
-}
-slices
-{
-}
-summary
-{
-}
-meshing
-{
-	parallel	false;
-	processors	8;
-	meshingStages
-	{
-		Base	true;
-		Mesh	true;
-		Layers	true;
-	}
-}
-parameters
-{
 }
 Graphics3D
 {
@@ -255,7 +247,7 @@ Graphics3D
 		refine
 		{
 			color	(112 128 144);
-			transparency	0.5;
+			transparency	0.0;
 			hide	false;
 		}
 	}
@@ -266,7 +258,21 @@ Graphics3D
 	{
 	}
 }
-mesh
+meshing
+{
+	parallel	false;
+	processors	8;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+parameters
+{
+}
+probes
 {
 }
 regionProperties
@@ -277,11 +283,5 @@ regionProperties
 		cellZones
 		{
 		}
-	}
-}
-materials
-{
-	regions
-	{
 	}
 }

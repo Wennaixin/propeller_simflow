@@ -93,6 +93,11 @@ castellatedMeshControls
 	}
 	refinementRegions
 	{
+		refine
+		{
+			mode	inside;
+			levels	((1.0E30 2));
+		}
 	}
 	limitRegions
 	{
