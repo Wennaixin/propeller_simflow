@@ -1,74 +1,21 @@
-regionProperties
+probes
+{
+}
+application
+{
+	mode	normal;
+}
+summary
+{
+}
+fieldInputs
 {
 	default
 	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
 	}
 }
-inputs
+slices
 {
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-		}
-	}
-}
-meshing
-{
-	parallel	false;
-	processors	8;
-	meshingStages
-	{
-		Base	true;
-		Mesh	true;
-		Layers	true;
-	}
-}
-geometry
-{
-	propeller
-	{
-		scale	(1 1 1);
-		location	(0 0 0);
-		rotationAngle	0;
-		rotationAxis	(1 1 1);
-	}
-	external
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	1;
-	}
-	refine
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	0.3;
-	}
-}
-materials
-{
-	regions
-	{
-	}
 }
 primitiveMesh
 {
@@ -82,9 +29,19 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
+			x_minus
+			{
+				name	inlet;
+				type	patch;
+			}
 			x_plus
 			{
 				name	outlet;
+				type	patch;
+			}
+			z_minus
+			{
+				name	left;
 				type	patch;
 			}
 			y_plus
@@ -95,16 +52,6 @@ primitiveMesh
 			z_plus
 			{
 				name	boundaries;
-				type	patch;
-			}
-			z_minus
-			{
-				name	left;
-				type	patch;
-			}
-			x_minus
-			{
-				name	inlet;
 				type	patch;
 			}
 			y_minus
@@ -158,22 +105,22 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			y_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
 			x_minus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			x_plus
+			y_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			y_plus
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -192,12 +139,12 @@ primitiveMesh
 		axialGrading	1;
 		boundaries
 		{
-			inlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
-			cylinder
+			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -210,14 +157,25 @@ primitiveMesh
 		}
 	}
 }
-slices
+mesh
 {
 }
-summary
+inputs
 {
-}
-probes
-{
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
 }
 Graphics3D
 {
@@ -314,19 +272,61 @@ Graphics3D
 	{
 	}
 }
-parameters
+materials
 {
-}
-mesh
-{
-}
-fieldInputs
-{
-	default
+	regions
 	{
 	}
 }
-application
+meshing
 {
-	mode	normal;
+	parallel	false;
+	processors	8;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+geometry
+{
+	refine
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	0.3;
+	}
+	propeller
+	{
+		scale	(1 1 1);
+		location	(0 0 0);
+		rotationAngle	0;
+		rotationAxis	(1 1 1);
+	}
+	external
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	1;
+	}
+}
+parameters
+{
+}
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
 }

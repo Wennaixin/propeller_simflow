@@ -16,13 +16,19 @@ FoamFile
 	}
 	left
 	{
-		type	patch;
+		type	cyclicAMI;
+		neighbourPatch	right;
+		matchTolerance	1e-4;
+		transform	unknown;
 		startFace	449861;
 		nFaces	5680;
 	}
 	right
 	{
-		type	patch;
+		type	cyclicAMI;
+		neighbourPatch	left;
+		matchTolerance	1e-4;
+		transform	unknown;
 		startFace	455541;
 		nFaces	5408;
 	}
