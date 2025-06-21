@@ -40,7 +40,7 @@ FoamFile
 	}
 	external
 	{
-		type	wall;
+		type	patch;
 		startFace	469045;
 		nFaces	840;
 	}

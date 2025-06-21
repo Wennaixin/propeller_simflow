@@ -28,13 +28,6 @@ boundary	(
 			(2 6 5 1)
 		);
 	}
-	left
-	{
-		type	patch;
-		faces	(
-			(0 3 2 1)
-		);
-	}
 	boundaries
 	{
 		type	patch;
@@ -43,11 +36,11 @@ boundary	(
 			(4 5 6 7)
 		);
 	}
-	right
+	left
 	{
 		type	patch;
 		faces	(
-			(1 5 4 0)
+			(0 3 2 1)
 		);
 	}
 	inlet
@@ -55,6 +48,13 @@ boundary	(
 		type	patch;
 		faces	(
 			(0 4 7 3)
+		);
+	}
+	right
+	{
+		type	patch;
+		faces	(
+			(1 5 4 0)
 		);
 	}
 );
