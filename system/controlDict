@@ -8,7 +8,7 @@ FoamFile
 }
 application	simpleFoam;
 deltaT	1;
-endTime	100;
+endTime	1000;
 purgeWrite	2;
 startFrom	latestTime;
 startTime	0;

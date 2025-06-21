@@ -1,9 +1,10 @@
-parameters
+run
 {
+	parallel	false;
+	processors	8;
 }
-application
+probes
 {
-	mode	normal;
 }
 primitiveMesh
 {
@@ -17,6 +18,21 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
+			y_minus
+			{
+				name	right;
+				type	patch;
+			}
+			x_plus
+			{
+				name	outlet;
+				type	patch;
+			}
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
 			x_minus
 			{
 				name	inlet;
@@ -27,24 +43,9 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
-			{
-				name	right;
-				type	patch;
-			}
 			z_minus
 			{
 				name	left;
-				type	patch;
-			}
-			y_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			x_plus
-			{
-				name	outlet;
 				type	patch;
 			}
 		}
@@ -63,17 +64,17 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
 			outlet
 			{
 				name	boundaries;
 				type	patch;
 			}
 			cylinder
-			{
-				name	boundaries;
-				type	patch;
-			}
-			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -93,7 +94,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			y_minus
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -103,12 +104,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			x_minus
+			x_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			x_plus
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -145,41 +146,19 @@ primitiveMesh
 		}
 	}
 }
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
-}
 summary
 {
 }
-mesh
+initialization
 {
+	potentialInit	false;
+	nNonOrthogonalCorrectors	8;
+	mapInit	false;
+	mapConsistent	false;
 }
-slices
+regionInit
 {
-}
-inputs
-{
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-		}
-	}
+	patchInitializationMode	onInitialization;
 }
 meshing
 {
@@ -191,6 +170,12 @@ meshing
 		Mesh	true;
 		Layers	true;
 	}
+}
+parameters
+{
+}
+slices
+{
 }
 fieldInputs
 {
@@ -361,19 +346,6 @@ fieldInputs
 		}
 	}
 }
-materials
-{
-	regions
-	{
-	}
-}
-probes
-{
-}
-regionInit
-{
-	patchInitializationMode	onInitialization;
-}
 Graphics3D
 {
 	MeshParameters
@@ -474,24 +446,18 @@ Graphics3D
 	{
 	}
 }
-initialization
+materials
 {
-	potentialInit	false;
-	nNonOrthogonalCorrectors	8;
-	mapInit	false;
-	mapConsistent	false;
+	regions
+	{
+	}
+}
+application
+{
+	mode	normal;
 }
 geometry
 {
-	refine
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	0.3;
-	}
 	external
 	{
 		type	searchableCylinder;
@@ -508,9 +474,43 @@ geometry
 		rotationAngle	0;
 		rotationAxis	(1 1 1);
 	}
+	refine
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	0.3;
+	}
 }
-run
+regionProperties
 {
-	parallel	false;
-	processors	8;
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+inputs
+{
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
+}
+mesh
+{
 }
