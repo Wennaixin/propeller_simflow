@@ -16,7 +16,10 @@ gradSchemes
 }
 divSchemes
 {
-	default	Gauss upwind;
+	div((nuEff*dev2(T(grad(U)))))	Gauss linear;
+	div(R)	Gauss linear;
+	default	bounded Gauss upwind;
+	div(phi,U)	bounded Gauss upwind;
 }
 laplacianSchemes
 {
@@ -33,4 +36,10 @@ snGradSchemes
 fluxRequired
 {
 	default	no;
+	p	;
+}
+wallDist
+{
+	method	meshWave;
+	nRequired	false;
 }
