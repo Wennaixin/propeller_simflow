@@ -43,6 +43,31 @@ geometry
 		name	propeller;
 		includedAngle	120.0;
 	}
+	refine.stl
+	{
+		type	triSurfaceMesh;
+		simflowType	primitive;
+		primitiveType	cylinder;
+		name	refine;
+		point1	(-0.001 0 0);
+		point2	(1.5009999 0 0);
+		radius	0.3;
+		faceGroups
+		{
+			cylinder
+			{
+				name	refine;
+			}
+			disk1
+			{
+				name	refine;
+			}
+			disk2
+			{
+				name	refine;
+			}
+		}
+	}
 }
 castellatedMeshControls
 {
