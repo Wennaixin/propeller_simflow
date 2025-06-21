@@ -1,8 +1,20 @@
+probes
+{
+}
 summary
 {
 }
 geometry
 {
+	refine
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	0.3;
+	}
 	propeller
 	{
 		scale	(1 1 1);
@@ -19,26 +31,11 @@ geometry
 		length	1.502;
 		radius	1;
 	}
-	refine
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	0.3;
-	}
 }
 run
 {
 	parallel	false;
 	processors	8;
-}
-slices
-{
-}
-parameters
-{
 }
 meshing
 {
@@ -51,36 +48,8 @@ meshing
 		Layers	true;
 	}
 }
-application
+parameters
 {
-	mode	normal;
-}
-inputs
-{
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-		}
-	}
-}
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
 }
 Graphics3D
 {
@@ -182,12 +151,185 @@ Graphics3D
 	{
 	}
 }
-regionInit
+primitiveMesh
 {
-	patchInitializationMode	onInitialization;
+	type	box;
+	box
+	{
+		min	(0 0 0);
+		max	(1.5 1 1);
+		division	(30 20 20);
+		grading	(1 1 1);
+		lockCellSize	false;
+		boundaries
+		{
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			z_minus
+			{
+				name	left;
+				type	patch;
+			}
+			x_plus
+			{
+				name	outlet;
+				type	patch;
+			}
+			z_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_minus
+			{
+				name	right;
+				type	patch;
+			}
+			x_minus
+			{
+				name	inlet;
+				type	patch;
+			}
+		}
+	}
+	cylinder
+	{
+		axis	X;
+		origin	0;
+		radius	1;
+		length	1;
+		radialFraction	0.5;
+		radialDivision	10;
+		radialGrading	1;
+		axialDivision	10;
+		axialGrading	1;
+		circumferentialDivision	10;
+		boundaries
+		{
+			outlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+			cylinder
+			{
+				name	boundaries;
+				type	patch;
+			}
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+	plate
+	{
+		minx	-0.5;
+		miny	-0.5;
+		maxx	0.5;
+		maxy	0.5;
+		divisionx	10;
+		divisiony	10;
+		gradingx	1;
+		gradingy	1;
+		lockCellSize	false;
+		boundaries
+		{
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
+	wedge
+	{
+		lockCellSize	false;
+		origin	0;
+		radius	1;
+		length	1;
+		radialDivision	10;
+		radialGrading	1;
+		axialDivision	10;
+		axialGrading	1;
+		boundaries
+		{
+			outlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+			cylinder
+			{
+				name	boundaries;
+				type	patch;
+			}
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
+		}
+	}
 }
-probes
+regionProperties
 {
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+mesh
+{
+}
+inputs
+{
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
+}
+slices
+{
+}
+initialization
+{
+	potentialInit	false;
+	nNonOrthogonalCorrectors	8;
+	mapInit	false;
+	mapConsistent	false;
 }
 fieldInputs
 {
@@ -280,7 +422,7 @@ fieldInputs
 				inlet
 				{
 					type	turbulentIntensityKineticEnergyInlet;
-					intensity	0.05;
+					intensity	1e-02;
 				}
 				propeller
 				{
@@ -359,159 +501,17 @@ fieldInputs
 		}
 	}
 }
-primitiveMesh
+application
 {
-	type	box;
-	box
-	{
-		min	(0 0 0);
-		max	(1.5 1 1);
-		division	(30 20 20);
-		grading	(1 1 1);
-		lockCellSize	false;
-		boundaries
-		{
-			z_minus
-			{
-				name	left;
-				type	patch;
-			}
-			y_minus
-			{
-				name	right;
-				type	patch;
-			}
-			x_minus
-			{
-				name	inlet;
-				type	patch;
-			}
-			x_plus
-			{
-				name	outlet;
-				type	patch;
-			}
-			y_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			z_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-		}
-	}
-	cylinder
-	{
-		axis	X;
-		origin	0;
-		radius	1;
-		length	1;
-		radialFraction	0.5;
-		radialDivision	10;
-		radialGrading	1;
-		axialDivision	10;
-		axialGrading	1;
-		circumferentialDivision	10;
-		boundaries
-		{
-			outlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			inlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			cylinder
-			{
-				name	boundaries;
-				type	patch;
-			}
-		}
-	}
-	plate
-	{
-		minx	-0.5;
-		miny	-0.5;
-		maxx	0.5;
-		maxy	0.5;
-		divisionx	10;
-		divisiony	10;
-		gradingx	1;
-		gradingy	1;
-		lockCellSize	false;
-		boundaries
-		{
-			y_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			y_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			x_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			x_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-		}
-	}
-	wedge
-	{
-		lockCellSize	false;
-		origin	0;
-		radius	1;
-		length	1;
-		radialDivision	10;
-		radialGrading	1;
-		axialDivision	10;
-		axialGrading	1;
-		boundaries
-		{
-			inlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			outlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			cylinder
-			{
-				name	boundaries;
-				type	patch;
-			}
-		}
-	}
+	mode	normal;
+}
+regionInit
+{
+	patchInitializationMode	onInitialization;
 }
 materials
 {
 	regions
 	{
 	}
-}
-mesh
-{
-}
-initialization
-{
-	potentialInit	false;
-	nNonOrthogonalCorrectors	8;
-	mapInit	false;
-	mapConsistent	false;
 }

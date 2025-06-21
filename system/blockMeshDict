@@ -21,11 +21,26 @@ blocks	(
 );
 edges	();
 boundary	(
+	boundaries
+	{
+		type	patch;
+		faces	(
+			(3 7 6 2)
+			(4 5 6 7)
+		);
+	}
 	left
 	{
 		type	patch;
 		faces	(
 			(0 3 2 1)
+		);
+	}
+	outlet
+	{
+		type	patch;
+		faces	(
+			(2 6 5 1)
 		);
 	}
 	right
@@ -40,21 +55,6 @@ boundary	(
 		type	patch;
 		faces	(
 			(0 4 7 3)
-		);
-	}
-	outlet
-	{
-		type	patch;
-		faces	(
-			(2 6 5 1)
-		);
-	}
-	boundaries
-	{
-		type	patch;
-		faces	(
-			(3 7 6 2)
-			(4 5 6 7)
 		);
 	}
 );
