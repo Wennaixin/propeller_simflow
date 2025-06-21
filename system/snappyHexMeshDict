@@ -74,6 +74,14 @@ castellatedMeshControls
 	locationInMesh	(0 0 0);
 	refinementSurfaces
 	{
+		external
+		{
+			level	( 0 0 );
+			patchInfo
+			{
+				type	wall;
+			}
+		}
 	}
 	refinementRegions
 	{
@@ -83,6 +91,10 @@ castellatedMeshControls
 	}
 	features	
 	(
+	{
+		file	"external.eMesh";
+		levels	((0 0));
+	}
 	);
 	maxLocalCells	1000000;
 	maxGlobalCells	10000000;
