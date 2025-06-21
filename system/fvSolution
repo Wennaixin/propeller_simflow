@@ -31,6 +31,22 @@ solvers
 		tolerance	1.0E-6;
 		maxIter	100;
 	}
+	k
+	{
+		solver	PBiCGStab;
+		relTol	0.1;
+		preconditioner	DILU;
+		tolerance	1.0E-6;
+		maxIter	100;
+	}
+	epsilon
+	{
+		solver	PBiCGStab;
+		relTol	0.1;
+		preconditioner	DILU;
+		tolerance	1.0E-6;
+		maxIter	100;
+	}
 }
 SIMPLE
 {
@@ -40,6 +56,8 @@ SIMPLE
 	{
 		p	1.0E-4;
 		U	1.0E-4;
+		k	1.0E-4;
+		epsilon	1.0E-4;
 	}
 	pRefCell	0;
 	pRefValue	0.0;
@@ -48,4 +66,6 @@ relaxationFactors
 {
 	p	0.75;
 	U	0.75;
+	k	0.5;
+	epsilon	0.5;
 }

@@ -20,6 +20,8 @@ divSchemes
 	div(R)	Gauss linear;
 	default	bounded Gauss upwind;
 	div(phi,U)	bounded Gauss upwind;
+	div(phi,k)	bounded Gauss upwind;
+	div(phi,epsilon)	bounded Gauss upwind;
 }
 laplacianSchemes
 {
