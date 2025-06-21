@@ -11,6 +11,13 @@ snap	true;
 addLayers	false;
 geometry
 {
+	propeller.stl
+	{
+		type	triSurfaceMesh;
+		simflowType	stl;
+		name	propeller;
+		includedAngle	120.0;
+	}
 }
 castellatedMeshControls
 {

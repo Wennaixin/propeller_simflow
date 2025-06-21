@@ -1,20 +1,5 @@
-materials
+mesh
 {
-	regions
-	{
-	}
-}
-probes
-{
-}
-geometry
-{
-}
-inputs
-{
-	default
-	{
-	}
 }
 Graphics3D
 {
@@ -40,6 +25,12 @@ Graphics3D
 	}
 	GeometryParameters
 	{
+		propeller
+		{
+			color	(112 128 144);
+			transparency	0.0;
+			hide	false;
+		}
 	}
 	postprocessingPlots
 	{
@@ -48,8 +39,21 @@ Graphics3D
 	{
 	}
 }
-slices
+regionProperties
 {
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+materials
+{
+	regions
+	{
+	}
 }
 primitiveMesh
 {
@@ -63,12 +67,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			x_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			y_plus
+			z_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -78,17 +77,22 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
 			z_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			z_minus
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -109,7 +113,7 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
-			cylinder
+			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -119,7 +123,7 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			inlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
@@ -139,12 +143,7 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			x_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			y_minus
+			y_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -154,7 +153,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_plus
+			y_minus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -178,40 +182,28 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			inlet
-			{
-				name	boundaries;
-				type	patch;
-			}
 			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
 		}
 	}
 }
-regionProperties
+geometry
 {
-	default
+	propeller
 	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
+		scale	(1 1 1);
+		location	(0 0 0);
+		rotationAngle	0;
+		rotationAxis	(1 1 1);
 	}
-}
-parameters
-{
-}
-fieldInputs
-{
-	default
-	{
-	}
-}
-summary
-{
 }
 application
 {
@@ -228,6 +220,38 @@ meshing
 		Layers	true;
 	}
 }
-mesh
+inputs
 {
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
+}
+summary
+{
+}
+slices
+{
+}
+parameters
+{
+}
+probes
+{
+}
+fieldInputs
+{
+	default
+	{
+	}
 }
