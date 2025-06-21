@@ -13,5 +13,5 @@ external
 	origin	(0 0 0);
 	axis	(-1 0 0);
 	omega	constant 300;
-	nonRotatingPatches	(external outlet left right inlet);
+	nonRotatingPatches	(external inlet outlet left right);
 }
