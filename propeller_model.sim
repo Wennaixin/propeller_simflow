@@ -1,59 +1,5 @@
-mesh
+parameters
 {
-}
-Graphics3D
-{
-	MeshParameters
-	{
-	}
-	CellZonesParameters
-	{
-	}
-	ProbeParameters
-	{
-	}
-	View
-	{
-		SavedViews
-		{
-		}
-	}
-	PostprocessingParameters
-	{
-		ActiveTime	0;
-		ActiveField	Solid;
-	}
-	GeometryParameters
-	{
-		propeller
-		{
-			color	(112 128 144);
-			transparency	0.0;
-			hide	false;
-		}
-	}
-	postprocessingPlots
-	{
-	}
-	SlicesParameters
-	{
-	}
-}
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
-}
-materials
-{
-	regions
-	{
-	}
 }
 primitiveMesh
 {
@@ -72,12 +18,7 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			x_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			z_plus
+			x_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -87,12 +28,17 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
+			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
 			y_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			x_minus
+			z_plus
 			{
 				name	boundaries;
 				type	patch;
@@ -118,12 +64,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			outlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
-			cylinder
+			outlet
 			{
 				name	boundaries;
 				type	patch;
@@ -153,12 +99,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
+			x_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			x_plus
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -195,30 +141,20 @@ primitiveMesh
 		}
 	}
 }
-geometry
+materials
 {
-	propeller
+	regions
 	{
-		scale	(1 1 1);
-		location	(0 0 0);
-		rotationAngle	0;
-		rotationAxis	(1 1 1);
 	}
 }
-application
+summary
 {
-	mode	normal;
 }
-meshing
+probes
 {
-	parallel	false;
-	processors	8;
-	meshingStages
-	{
-		Base	true;
-		Mesh	true;
-		Layers	true;
-	}
+}
+mesh
+{
 }
 inputs
 {
@@ -237,21 +173,100 @@ inputs
 		}
 	}
 }
-summary
+meshing
 {
+	parallel	false;
+	processors	8;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+Graphics3D
+{
+	MeshParameters
+	{
+	}
+	CellZonesParameters
+	{
+	}
+	ProbeParameters
+	{
+	}
+	View
+	{
+		SavedViews
+		{
+		}
+	}
+	PostprocessingParameters
+	{
+		ActiveTime	0;
+		ActiveField	Solid;
+	}
+	GeometryParameters
+	{
+		propeller
+		{
+			color	(112 128 144);
+			transparency	0.0;
+			hide	false;
+		}
+		external
+		{
+			color	(112 128 144);
+			transparency	0.0;
+			hide	false;
+		}
+	}
+	postprocessingPlots
+	{
+	}
+	SlicesParameters
+	{
+	}
 }
 slices
-{
-}
-parameters
-{
-}
-probes
 {
 }
 fieldInputs
 {
 	default
 	{
+	}
+}
+application
+{
+	mode	normal;
+}
+geometry
+{
+	propeller
+	{
+		scale	(1 1 1);
+		location	(0 0 0);
+		rotationAngle	0;
+		rotationAxis	(1 1 1);
+	}
+	external
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	1;
 	}
 }
