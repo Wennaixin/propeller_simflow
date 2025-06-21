@@ -1,23 +1,10 @@
-materials
+slices
 {
-	regions
-	{
-	}
 }
 run
 {
 	parallel	false;
 	processors	8;
-}
-initialization
-{
-	potentialInit	false;
-	nNonOrthogonalCorrectors	8;
-	mapInit	false;
-	mapConsistent	false;
-}
-probes
-{
 }
 fieldInputs
 {
@@ -90,10 +77,114 @@ fieldInputs
 				}
 			}
 		}
+		k
+		{
+			internalField	uniform 1e-02;
+			boundaryField
+			{
+				outlet
+				{
+					type	zeroGradient;
+				}
+				left
+				{
+					type	cyclicAMI;
+				}
+				right
+				{
+					type	cyclicAMI;
+				}
+				inlet
+				{
+					type	turbulentIntensityKineticEnergyInlet;
+					intensity	0.05;
+				}
+				propeller
+				{
+					type	kqRWallFunction;
+				}
+				external
+				{
+					type	turbulentIntensityKineticEnergyInlet;
+					intensity	0.05;
+				}
+			}
+		}
+		epsilon
+		{
+			internalField	uniform 1;
+			boundaryField
+			{
+				outlet
+				{
+					type	zeroGradient;
+				}
+				left
+				{
+					type	cyclicAMI;
+				}
+				right
+				{
+					type	cyclicAMI;
+				}
+				inlet
+				{
+					type	turbulentMixingLengthDissipationRateInlet;
+					mixingLength	1e-03;
+				}
+				propeller
+				{
+					type	epsilonWallFunction;
+				}
+				external
+				{
+					type	turbulentMixingLengthDissipationRateInlet;
+					mixingLength	1e-03;
+				}
+			}
+		}
+		nut
+		{
+			internalField	uniform 0.1;
+			boundaryField
+			{
+				outlet
+				{
+					type	calculated;
+				}
+				left
+				{
+					type	cyclicAMI;
+				}
+				right
+				{
+					type	cyclicAMI;
+				}
+				inlet
+				{
+					type	calculated;
+				}
+				propeller
+				{
+					type	nutUWallFunction;
+				}
+				external
+				{
+					type	calculated;
+				}
+			}
+		}
 	}
 }
-mesh
+parameters
 {
+}
+initialization
+{
+	potentialInit	false;
+	nNonOrthogonalCorrectors	8;
+	mapInit	false;
+	mapConsistent	false;
 }
 Graphics3D
 {
@@ -190,7 +281,28 @@ Graphics3D
 	{
 	}
 }
-slices
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+summary
+{
+}
+regionInit
+{
+	patchInitializationMode	onInitialization;
+}
+application
+{
+	mode	normal;
+}
+probes
 {
 }
 primitiveMesh
@@ -210,19 +322,14 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
-			{
-				name	right;
-				type	patch;
-			}
 			z_minus
 			{
 				name	left;
 				type	patch;
 			}
-			x_minus
+			y_plus
 			{
-				name	inlet;
+				name	boundaries;
 				type	patch;
 			}
 			x_plus
@@ -230,9 +337,14 @@ primitiveMesh
 				name	outlet;
 				type	patch;
 			}
-			y_plus
+			y_minus
 			{
-				name	boundaries;
+				name	right;
+				type	patch;
+			}
+			x_minus
+			{
+				name	inlet;
 				type	patch;
 			}
 		}
@@ -251,17 +363,17 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
+			inlet
+			{
+				name	boundaries;
+				type	patch;
+			}
 			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
 			outlet
-			{
-				name	boundaries;
-				type	patch;
-			}
-			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -286,17 +398,17 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
-			{
-				name	boundaries;
-				type	patch;
-			}
 			x_minus
 			{
 				name	boundaries;
 				type	patch;
 			}
 			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -315,12 +427,12 @@ primitiveMesh
 		axialGrading	1;
 		boundaries
 		{
-			cylinder
+			outlet
 			{
 				name	boundaries;
 				type	patch;
 			}
-			outlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
@@ -333,57 +445,8 @@ primitiveMesh
 		}
 	}
 }
-parameters
+mesh
 {
-}
-application
-{
-	mode	normal;
-}
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
-}
-regionInit
-{
-	patchInitializationMode	onInitialization;
-}
-summary
-{
-}
-geometry
-{
-	refine
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	0.3;
-	}
-	external
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	1;
-	}
-	propeller
-	{
-		scale	(1 1 1);
-		location	(0 0 0);
-		rotationAngle	0;
-		rotationAxis	(1 1 1);
-	}
 }
 inputs
 {
@@ -402,6 +465,12 @@ inputs
 		}
 	}
 }
+materials
+{
+	regions
+	{
+	}
+}
 meshing
 {
 	parallel	false;
@@ -411,5 +480,33 @@ meshing
 		Base	true;
 		Mesh	true;
 		Layers	true;
+	}
+}
+geometry
+{
+	external
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	1;
+	}
+	refine
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	0.3;
+	}
+	propeller
+	{
+		scale	(1 1 1);
+		location	(0 0 0);
+		rotationAngle	0;
+		rotationAxis	(1 1 1);
 	}
 }
