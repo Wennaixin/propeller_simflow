@@ -1,14 +1,9 @@
+application
+{
+	mode	normal;
+}
 geometry
 {
-	external
-	{
-		type	searchableCylinder;
-		point1	(-1e-03 0 0);
-		point2	(1.5009999 0 0);
-		axis	(1 0 0);
-		length	1.502;
-		radius	1;
-	}
 	propeller
 	{
 		scale	(1 1 1);
@@ -25,68 +20,21 @@ geometry
 		length	1.502;
 		radius	0.3;
 	}
+	external
+	{
+		type	searchableCylinder;
+		point1	(-1e-03 0 0);
+		point2	(1.5009999 0 0);
+		axis	(1 0 0);
+		length	1.502;
+		radius	1;
+	}
 }
 fieldInputs
 {
 	default
 	{
 	}
-}
-meshing
-{
-	parallel	false;
-	processors	8;
-	meshingStages
-	{
-		Base	true;
-		Mesh	true;
-		Layers	true;
-	}
-}
-inputs
-{
-	default
-	{
-		radiationProperties
-		{
-			solarLoarCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-			solarLoadCoeffs
-			{
-				sunDirection	(0 0 -1);
-			}
-		}
-	}
-}
-parameters
-{
-}
-materials
-{
-	regions
-	{
-	}
-}
-regionProperties
-{
-	default
-	{
-		bafflesSplit	false;
-		cellZones
-		{
-		}
-	}
-}
-probes
-{
-}
-summary
-{
-}
-mesh
-{
 }
 primitiveMesh
 {
@@ -100,16 +48,6 @@ primitiveMesh
 		lockCellSize	false;
 		boundaries
 		{
-			z_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
-			x_plus
-			{
-				name	boundaries;
-				type	patch;
-			}
 			y_minus
 			{
 				name	boundaries;
@@ -130,6 +68,16 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
+			z_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
+			x_plus
+			{
+				name	boundaries;
+				type	patch;
+			}
 		}
 	}
 	cylinder
@@ -146,12 +94,12 @@ primitiveMesh
 		circumferentialDivision	10;
 		boundaries
 		{
-			outlet
+			cylinder
 			{
 				name	boundaries;
 				type	patch;
 			}
-			cylinder
+			outlet
 			{
 				name	boundaries;
 				type	patch;
@@ -186,12 +134,12 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			y_minus
+			y_plus
 			{
 				name	boundaries;
 				type	patch;
 			}
-			y_plus
+			y_minus
 			{
 				name	boundaries;
 				type	patch;
@@ -210,7 +158,7 @@ primitiveMesh
 		axialGrading	1;
 		boundaries
 		{
-			outlet
+			inlet
 			{
 				name	boundaries;
 				type	patch;
@@ -220,7 +168,7 @@ primitiveMesh
 				name	boundaries;
 				type	patch;
 			}
-			inlet
+			outlet
 			{
 				name	boundaries;
 				type	patch;
@@ -228,11 +176,44 @@ primitiveMesh
 		}
 	}
 }
-application
+inputs
 {
-	mode	normal;
+	default
+	{
+		radiationProperties
+		{
+			solarLoarCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+			solarLoadCoeffs
+			{
+				sunDirection	(0 0 -1);
+			}
+		}
+	}
+}
+probes
+{
 }
 slices
+{
+}
+summary
+{
+}
+meshing
+{
+	parallel	false;
+	processors	8;
+	meshingStages
+	{
+		Base	true;
+		Mesh	true;
+		Layers	true;
+	}
+}
+parameters
 {
 }
 Graphics3D
@@ -282,6 +263,25 @@ Graphics3D
 	{
 	}
 	SlicesParameters
+	{
+	}
+}
+mesh
+{
+}
+regionProperties
+{
+	default
+	{
+		bafflesSplit	false;
+		cellZones
+		{
+		}
+	}
+}
+materials
+{
+	regions
 	{
 	}
 }

@@ -8,7 +8,7 @@ FoamFile
 }
 castellatedMesh	true;
 snap	true;
-addLayers	false;
+addLayers	true;
 geometry
 {
 	external.stl
@@ -82,6 +82,14 @@ castellatedMeshControls
 				type	wall;
 			}
 		}
+		propeller
+		{
+			level	( 3 4 );
+			patchInfo
+			{
+				type	wall;
+			}
+		}
 	}
 	refinementRegions
 	{
@@ -93,6 +101,10 @@ castellatedMeshControls
 	(
 	{
 		file	"external.eMesh";
+		levels	((0 0));
+	}
+	{
+		file	"propeller.eMesh";
 		levels	((0 0));
 	}
 	);
@@ -120,6 +132,18 @@ addLayersControls
 {
 	layers
 	{
+		propeller
+		{
+			nSurfaceLayers	5;
+			expansionRatio	1.25;
+			firstLayerThickness	0.2;
+		}
+		propeller_patch0
+		{
+			nSurfaceLayers	5;
+			expansionRatio	1.25;
+			firstLayerThickness	0.2;
+		}
 	}
 	relativeSizes	true;
 	minThickness	0.1;
