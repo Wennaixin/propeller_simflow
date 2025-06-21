@@ -7,4 +7,4 @@ FoamFile
 	object	transportProperties;
 }
 transportModel	Newtonian;
-nu	nu [0 2 -1 0 0 0 0] 1.5E-5;
+nu	nu [0 2 -1 0 0 0 0] 1.0E-6;
