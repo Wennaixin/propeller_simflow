@@ -71,7 +71,7 @@ geometry
 }
 castellatedMeshControls
 {
-	locationInMesh	(0 0 0);
+	locationInMesh	(0.5 0.5 0.5);
 	refinementSurfaces
 	{
 		external
